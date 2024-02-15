@@ -1,0 +1,13 @@
+###################
+# Outputs key pairs
+###################
+
+output "private_key" {
+  value     = tls_private_key.helix-private-key.private_key_pem
+  sensitive = true
+}
+
+output "public_key_pem" {
+  value     = tls_private_key.helix-private-key.public_key_openssh
+  sensitive = true
+}

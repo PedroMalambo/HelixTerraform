@@ -1,0 +1,13 @@
+########## Creacion de Key Pair #########
+resource "tls_private_key" "helix-private-key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096 
+  }
+resource "local_file" "helix-private-key" {
+  content = tls_private_key.helix-private-key.private_key_pem
+  filename = "helix-private-key.pem"
+}
+resource "aws_key_pair" "helix-generated-key" {
+  key_name   = "${var.key_name}" 
+  public_key = tls_private_key.helix-private-key.public_key_openssh
+}
